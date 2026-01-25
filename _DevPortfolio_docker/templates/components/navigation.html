@@ -1,0 +1,12 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">DevPortfolio</a>
+        <a class="btn btn-outline-secondary" href="{% url 'order:order_form' %}">Залишити замовлення</a>
+    </div>
+</nav>
+
+{% if user.is_authenticated %}
+    <p>Ласкаво просимо, {{ user.username }}!</p>
+{% else %}
+    <p>Будь ласка, увійдіть в систему</p>
+{% endif %}

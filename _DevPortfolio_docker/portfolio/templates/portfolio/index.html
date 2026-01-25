@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block title %}Головна — DevPortfolio{% endblock %}
+
+{% block content %}
+
+<!-- Hero -->
+<div class="row align-items-center mb-5">
+    <div class="col-md-7">
+        <h1 class="display-5">Привіт — я Валентин, Python/Django розробник</h1>
+        <p class="lead">Я створюю веб-додатки та автоматизую процеси. Ось мої останні роботи і навички.</p>
+        <p>
+            <a class="btn btn-primary" href="#projects">Переглянути проекти</a>
+            <a class="btn btn-outline-secondary" href="#contact">Зв'язатися</a>
+        </p>
+    </div>
+    <div class="col-md-5 text-center">
+        <img src="/media/img/profile.jpg" alt="profile" class="img-fluid rounded-circle" style="max-width:220px;">
+    </div>
+</div>
+
+
+<!-- About -->
+<section id="about" class="mb-5">
+    <h2>Про мене</h2>
+    <p>Короткий опис: хто ви, чим займаєтесь, контактні канали.</p>
+</section>
+
+
+<!-- Skills -->
+<section id="skills" class="mb-5">
+    <h2>Навички</h2>
+    <div class="container row">
+        {% for skill in skills %}
+            <div class="mb-3">
+            <div class="d-flex justify-content-between">
+                <strong>{{ skill.name }}</strong>
+            </div>             
+        
+            <div class="progress" role="progressbar"  aria-valuenow="{{ skill.level }}" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar text-bg-success" style="width: {{ skill.level }}%">{{ skill.level }}%</div>
+            </div>   
+            </div>
+        {% empty %}
+            <p>Немає навичок — додайте у адмінці.</p>
+        {% endfor %}
+    </div>
+</section>
+
+
+<!-- Projects -->
+<section id="projects" class="mb-5">
+<h2>Проекти</h2>
+<div class="row">
+    {% for p in projects %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            {% if p.image %}
+                <img src="{{ p.image.url }}" class="card-img-top" alt="{{ p.title }}">
+            {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ p.title }}</h5>
+                    <p class="card-text">{{ p.description|truncatechars:120 }}</p>
+                </div>
+            <div class="card-footer">
+                {% if p.github_url %}<a href="{{ p.github_url }}" target="_blank">GitHub</a>{% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</section>
+
+
+{% endblock %}
