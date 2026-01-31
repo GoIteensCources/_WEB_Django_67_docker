@@ -1,0 +1,27 @@
+services:
+  
+  web:
+    build: .
+    command: gunicorn dev_portfolio.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgresql://portfolio_user:password123@db:5432/portfolio_db
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=portfolio_db
+      - POSTGRES_USER=portfolio_user
+      - POSTGRES_PASSWORD=password123
+
+volumes:
+  postgres_data:

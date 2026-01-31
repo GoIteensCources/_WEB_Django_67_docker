@@ -1,0 +1,11 @@
+Django==5.2.5
+django-filter==25.2
+djangorestframework==3.16.1
+gunicorn==24.1.1
+Markdown==3.10
+pillow==11.3.0
+python-dotenv==1.2.1
+sqlparse==0.5.3
+whitenoise==6.11.0
+dj_database_url==3.1.0
+psycopg[binary]
